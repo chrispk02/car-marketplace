@@ -1,0 +1,108 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  BUYER
+  SELLER
+  ADMIN
+}
+
+enum ListingStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  SOLD
+}
+
+enum RequestStatus {
+  PENDING
+  NEGOTIATING
+  COMPLETED
+  CANCELLED
+}
+
+model User {
+  id                String            @id @default(uuid())
+  email             String            @unique
+  password          String
+  name              String
+  role              Role              @default(BUYER)
+  phone             String?           // Only visible to Admin
+  listings          Listing[]         @relation("SellerListings")
+  purchaseRequests  PurchaseRequest[] @relation("BuyerRequests")
+  sentMessages      Message[]         @relation("Sender")
+  receivedMessages  Message[]         @relation("Receiver")
+  ratings           SellerRating[]    @relation("TargetSeller")
+  createdAt         DateTime          @default(now())
+}
+
+model Listing {
+  id               String           @id @default(uuid())
+  brand            String
+  model            String
+  year             Int
+  mileage          Int
+  price            Float
+  condition        String           // New / Used
+  location         String
+  description      String           @db.Text
+  status           ListingStatus    @default(PENDING)
+  sellerId         String
+  seller           User             @relation("SellerListings", fields: [sellerId], references: [id])
+  images           ListingImage[]
+  purchaseRequests PurchaseRequest[]
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  @@index([brand])
+  @@index([price])
+  @@index([location])
+  @@index([sellerId])
+}
+
+model ListingImage {
+  id        String   @id @default(uuid())
+  url       String
+  listingId String
+  listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+}
+
+model PurchaseRequest {
+  id          String        @id @default(uuid())
+  status      RequestStatus @default(PENDING)
+  buyerId     String
+  listingId   String
+  buyer       User          @relation("BuyerRequests", fields: [buyerId], references: [id])
+  listing     Listing       @relation(fields: [listingId], references: [id])
+  messages    Message[]
+  commission  Float?        @default(0)
+  createdAt   DateTime      @default(now())
+}
+
+model Message {
+  id                String           @id @default(uuid())
+  content           String           @db.Text
+  requestId         String
+  purchaseRequest   PurchaseRequest  @relation(fields: [requestId], references: [id])
+  senderId          String
+  sender            User             @relation("Sender", fields: [senderId], references: [id])
+  receiverId        String
+  receiver          User             @relation("Receiver", fields: [receiverId], references: [id])
+  createdAt         DateTime         @default(now())
+}
+
+model SellerRating {
+  id        String   @id @default(uuid())
+  rating    Int      // 1-5
+  comment   String?
+  sellerId  String
+  seller    User     @relation("TargetSeller", fields: [sellerId], references: [id])
+}
