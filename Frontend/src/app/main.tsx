@@ -1,11 +1,10 @@
-import "./globals.css"; // Dòng này cực kỳ quan trọng để kích hoạt hình khối
+import {StrictMode} from 'react';
+import {createRoot} from 'react-dom/client';
+import App from './App';
+import './index.css';
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <body className="antialiased">
-        {children}
-      </body>
-    </html>
-  );
-}
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+);
