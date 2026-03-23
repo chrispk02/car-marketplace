@@ -141,7 +141,7 @@ const FeaturedCurations = () => (
             type: 'Used',
             price: '$84,900',
             mileage: '12,450 mi',
-            location: 'Miami, FL',
+            location: 'My Dinh',
             badge: 'Great Deal',
             image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBPcCNlU0A2f7ZoSHqGlccNHlrUtfs50mFiYakuVUh-qQjjtjzPPUdFgcKiF651CJPGdT-Z6QliN5fyJmZBZYAfB22dNsVhy2YOQlmZB6pse_4l_c4CpdnWeMinM6hBroLP5-OEMTvFSRVH3ywiasejpCpepaPbsriBV-Y8uFmeEwCwV1ZdFAUmoZ72iM89OKnIlJ9S096uGiROsUxDFB3LkFkcvF8XcL3Nrvyqas0BazL4s8q1zcphCba6Be0SVPxQffq3mO2RJyA3'
           },
@@ -151,7 +151,7 @@ const FeaturedCurations = () => (
             type: 'Used',
             price: '$112,500',
             mileage: '8,200 mi',
-            location: 'Austin, TX',
+            location: 'Dong Da',
             badge: 'Newly Listed',
             badgeColor: 'bg-secondary',
             image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA3exN5CAUdDiS0eJen0WmylZk_FK3aYIQZRDiIn2uQoXVPYW612BaH7bsPbWx9B8wx5M4NXoepNhTdF9i-P2ov8DgstlZfLKCVK7NAq4AymRYmWKTy_SBcX_6GYLLmSumCoKiIgsr6sAgNfx-7oxF8k3ZQzJwj43Q0sFEE0Ns6eomrAADyqfd9gveIVksTrYzas46TxUt0qGaSlTKy5OOYLuRYRQHKRGsvv4TpKwDNEII8T840TB4cqHuOXHgX5KEn3ShX2Y8im0cx'
@@ -163,7 +163,7 @@ const FeaturedCurations = () => (
             price: '$147,000',
             mileage: '249 mi',
             mileageLabel: 'Range',
-            location: 'Los Angeles, CA',
+            location: 'Thanh Xuan',
             badge: 'Great Deal',
             image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC2aIDkNQOjOaI-1lceDcZlyGXSgT9Sm0Y1CH4guoTR-KAalnrj1ZERCuQTzShADtPeVZXZUHaPqzJ1YRpylfryVd-bKW9qrTn1NMHiU3Cp5ZWfv70ETRel7kfoEsdueMuR3_KLbIeJ9uRW6OlzDT4WgGTVgZLhlXpdtd4piUWmvHlq6q6aHXRmDdryx4wT5cfsfGDhYDZMjz5jSw3_j52ucNJNHdJDQcRaFfb667Fzql9oH5vpxiFq2MXiX4sQwqnW_KxxkxHlYlH_'
           },
@@ -173,7 +173,7 @@ const FeaturedCurations = () => (
             type: 'Used',
             price: '$98,000',
             mileage: '15,100 mi',
-            location: 'Greenwich, CT',
+            location: 'Cau Giay',
             badge: 'New Arrival',
             badgeColor: 'bg-gray-900',
             image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAiZp3hpA8Tt8smUGPwavdmKfz3js_FKBPHIjCYSsWBD9foVYqXwSFn0GKAlGMJxZ_kfkC9G4LawbYlhbJbwvJPCmKp4ByJzYa9L-iyC1ItoEIdUOnsNKkai06XCOZKYEDmTAWcPLGx4RzbhH7BYdnJrmdwVZRpNqIK5s94epKOMf41wInDE02QKOW2rhK2YqkTWK9qTqARrVppKBPaEPVc4-whHvy1ZgSg37UyxXwoluP2qdhasV1pYqcAd-HFcRHP6Pk63tS0U9vs'
