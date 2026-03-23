@@ -1,0 +1,60 @@
+import { Car, BodyType } from "./types";
+
+export const CARS: Car[] = [
+  {
+    id: "1",
+    make: "BMW",
+    model: "M4 Competition",
+    year: 2022,
+    price: 84900,
+    mileage: 12450,
+    location: "Miami, FL",
+    image: "https://images.unsplash.com/photo-1617814076367-b757c7a72f38?auto=format&fit=crop&q=80&w=800",
+    badge: "GREAT DEAL",
+    isNew: false,
+  },
+  {
+    id: "2",
+    make: "Porsche",
+    model: "911 Carrera",
+    year: 2021,
+    price: 112500,
+    mileage: 8200,
+    location: "Austin, TX",
+    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800",
+    badge: "NEWLY LISTED",
+    isNew: false,
+  },
+  {
+    id: "3",
+    make: "Audi",
+    model: "RS e-tron GT",
+    year: 2024,
+    price: 147000,
+    mileage: 249,
+    location: "Los Angeles, CA",
+    image: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=800",
+    badge: "GREAT DEAL",
+    isNew: true,
+  },
+  {
+    id: "4",
+    make: "Range Rover",
+    model: "Sport",
+    year: 2023,
+    price: 98000,
+    mileage: 15100,
+    location: "Greenwich, CT",
+    image: "https://images.unsplash.com/photo-1541348263662-e0c86430ec21?auto=format&fit=crop&q=80&w=800",
+    badge: "NEW ARRIVAL",
+    isNew: false,
+  },
+];
+
+export const BODY_TYPES: BodyType[] = [
+  { id: "1", name: "SUV", icon: "CarFront" },
+  { id: "2", name: "SEDAN", icon: "Car" },
+  { id: "3", name: "PICKUP", icon: "Truck" },
+  { id: "4", name: "COUPE", icon: "Car" },
+  { id: "5", name: "HATCHBACK", icon: "Car" },
+];
