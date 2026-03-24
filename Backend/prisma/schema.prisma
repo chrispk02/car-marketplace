@@ -1,4 +1,5 @@
-// prisma/schema.prisma
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
   provider = "prisma-client-js"
@@ -15,94 +16,58 @@ enum Role {
   ADMIN
 }
 
-enum ListingStatus {
-  PENDING
-  APPROVED
-  REJECTED
-  SOLD
-}
-
-enum RequestStatus {
-  PENDING
-  NEGOTIATING
-  COMPLETED
-  CANCELLED
+enum SellerType {
+  USED
+  NEW
 }
 
 model User {
-  id                String            @id @default(uuid())
-  email             String            @unique
-  password          String
-  name              String
-  role              Role              @default(BUYER)
-  phone             String?           // Only visible to Admin
-  listings          Listing[]         @relation("SellerListings")
-  purchaseRequests  PurchaseRequest[] @relation("BuyerRequests")
-  sentMessages      Message[]         @relation("Sender")
-  receivedMessages  Message[]         @relation("Receiver")
-  ratings           SellerRating[]    @relation("TargetSeller")
-  createdAt         DateTime          @default(now())
+  id         String      @id @default(uuid())
+  email      String      @unique
+  password   String
+  role       Role        @default(BUYER)
+  sellerType SellerType?
+  listings   Listing[]
+  leads      Lead[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  @@map("users")
 }
 
 model Listing {
-  id               String           @id @default(uuid())
-  brand            String
-  model            String
-  year             Int
-  mileage          Int
-  price            Float
-  condition        String           // New / Used
-  location         String
-  description      String           @db.Text
-  status           ListingStatus    @default(PENDING)
-  sellerId         String
-  seller           User             @relation("SellerListings", fields: [sellerId], references: [id])
-  images           ListingImage[]
-  purchaseRequests PurchaseRequest[]
-  createdAt        DateTime         @default(now())
-  updatedAt        DateTime         @updatedAt
+  id         String   @id @default(uuid())
+  title      String
+  price      Float
+  brand      String
+  year       Int
+  images     String[]
+  status     String   @default("PENDING")
+  sellerId   String
+  seller     User     @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  sellerType SellerType
+  leads      Lead[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
-  @@index([brand])
-  @@index([price])
-  @@index([location])
   @@index([sellerId])
+  @@map("listings")
 }
 
-model ListingImage {
+model Lead {
   id        String   @id @default(uuid())
-  url       String
+  buyerName String
+  phone     String
+  budget    Float
   listingId String
   listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
-}
+  buyerId   String
+  buyer     User     @relation(fields: [buyerId], references: [id], onDelete: Cascade)
+  status    String   @default("NEW")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-model PurchaseRequest {
-  id          String        @id @default(uuid())
-  status      RequestStatus @default(PENDING)
-  buyerId     String
-  listingId   String
-  buyer       User          @relation("BuyerRequests", fields: [buyerId], references: [id])
-  listing     Listing       @relation(fields: [listingId], references: [id])
-  messages    Message[]
-  commission  Float?        @default(0)
-  createdAt   DateTime      @default(now())
-}
-
-model Message {
-  id                String           @id @default(uuid())
-  content           String           @db.Text
-  requestId         String
-  purchaseRequest   PurchaseRequest  @relation(fields: [requestId], references: [id])
-  senderId          String
-  sender            User             @relation("Sender", fields: [senderId], references: [id])
-  receiverId        String
-  receiver          User             @relation("Receiver", fields: [receiverId], references: [id])
-  createdAt         DateTime         @default(now())
-}
-
-model SellerRating {
-  id        String   @id @default(uuid())
-  rating    Int      // 1-5
-  comment   String?
-  sellerId  String
-  seller    User     @relation("TargetSeller", fields: [sellerId], references: [id])
+  @@index([listingId])
+  @@index([buyerId])
+  @@map("leads")
 }

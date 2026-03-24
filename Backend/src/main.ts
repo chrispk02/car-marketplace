@@ -1,13 +1,31 @@
-import { NestFactory } from "@nestjs/core";
-import { Module } from "@nestjs/common";
-
-@Module({})
-class AppModule {}
+import { NestFactory } from '@nestjs/core';
+import { ValidationPipe } from '@nestjs/common';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(4000);
-  console.log("Server running on http://localhost:4000");
+
+  // Enable global validation
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+    }),
+  );
+
+  // Enable CORS
+  app.enableCors({
+    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    credentials: true,
+  });
+
+  const port = process.env.PORT || 4000;
+  await app.listen(port);
+  console.log(`✓ Server running on http://localhost:${port}`);
 }
 
-bootstrap();
+bootstrap().catch((error) => {
+  console.error('Failed to start server:', error);
+  process.exit(1);
+});
