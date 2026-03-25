@@ -6,51 +6,78 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
-enum Role {
-  BUYER
-  SELLER
-  ADMIN
-}
+// Enums as string fields for SQLite compatibility
+// enum Role {
+//   BUYER
+//   SELLER
+//   ADMIN
+// }
 
-enum SellerType {
-  USED
-  NEW
-}
+// enum SellerType {
+//   USED
+//   NEW
+// }
 
 model User {
-  id         String      @id @default(uuid())
-  email      String      @unique
+  id         String   @id @default(uuid())
+  email      String   @unique
   password   String
-  role       Role        @default(BUYER)
-  sellerType SellerType?
+  role       String   @default("BUYER") // BUYER, SELLER, ADMIN
+  sellerType String?  // USED, NEW
   listings   Listing[]
   leads      Lead[]
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   @@map("users")
 }
 
 model Listing {
-  id         String   @id @default(uuid())
-  title      String
-  price      Float
-  brand      String
-  year       Int
-  images     String[]
-  status     String   @default("PENDING")
-  sellerId   String
-  seller     User     @relation(fields: [sellerId], references: [id], onDelete: Cascade)
-  sellerType SellerType
-  leads      Lead[]
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id             String      @id @default(uuid())
+  title          String
+  price          Float
+  brand          String
+  model          String
+  year           Int
+  bodyType       String      // SUV, Sedan, Coupe, Truck, etc.
+  color          String
+  mileage        Int
+  fuelType       String      // GASOLINE, DIESEL, ELECTRIC, HYBRID
+  transmission   String      // AUTOMATIC, MANUAL, CVT
+  condition      String      // EXCELLENT, GOOD, FAIR, POOR
+  engineSize     String?     // 1.8L, 2.0L, etc
+  horsepower     Int?
+  driveType      String?     // FWD, RWD, AWD
+  interior       String?     // Leather, Cloth, Suede
+  features       String?     // JSON string of amenities array
+  description    String?
+  exteriorColor  String?
+  interiorColor  String?
+  owner          String      // PRIVATE, DEALER
+  images         String?     // JSON string of images array
+  status         String      @default("PENDING")
+  isActive       Boolean     @default(true)
+  sellerId       String
+  seller         User        @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  sellerType     String      // USED, NEW
+  leads          Lead[]
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
 
   @@index([sellerId])
+  @@index([brand])
+  @@index([model])
+  @@index([year])
+  @@index([price])
+  @@index([bodyType])
+  @@index([fuelType])
+  @@index([transmission])
+  @@index([condition])
+  @@index([status])
   @@map("listings")
 }
 

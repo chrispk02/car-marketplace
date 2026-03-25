@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import { ListingsModule } from './listings/listings.module';
 import { PrismaService } from './prisma/prisma.service';
 
 @Module({
@@ -10,6 +11,7 @@ import { PrismaService } from './prisma/prisma.service';
       envFilePath: '.env',
     }),
     AuthModule,
+    ListingsModule,
   ],
   providers: [PrismaService],
 })

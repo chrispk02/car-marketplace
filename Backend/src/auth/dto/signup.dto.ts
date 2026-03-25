@@ -12,13 +12,13 @@ enum SellerType {
 
 export class SignupDto {
   @IsEmail()
-  email: string;
+  email!: string;
 
   @IsString()
-  password: string;
+  password!: string;
 
   @IsEnum(UserRole)
-  role: UserRole;
+  role!: UserRole;
 
   @IsOptional()
   @IsEnum(SellerType)

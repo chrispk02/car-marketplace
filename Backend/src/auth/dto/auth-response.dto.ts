@@ -8,14 +8,14 @@ enum UserRole {
 
 export class AuthResponseDto {
   @IsString()
-  token: string;
+  token!: string;
 
   @IsString()
-  id: string;
+  id!: string;
 
   @IsEmail()
-  email: string;
+  email!: string;
 
   @IsEnum(UserRole)
-  role: UserRole;
+  role!: UserRole;
 }
