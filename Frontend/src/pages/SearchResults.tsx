@@ -41,7 +41,7 @@ export default function SearchResults() {
   const [compareIds, setCompareIds] = useState<string[]>([]);
 
   const defaultFilters = {
-    query: searchParams.get('query') || '',
+    query: searchParams.get('search') || '',
     make: searchParams.get('brand') || '',
     model: searchParams.get('model') || '',
     minPrice: searchParams.get('minPrice') || '',

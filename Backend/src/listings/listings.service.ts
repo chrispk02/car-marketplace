@@ -55,7 +55,7 @@ export class ListingsService {
 
     const where: Prisma.ListingWhereInput = {
       isActive: true,
-      status: 'APPROVED', // Only show approved listings
+      // status: 'APPROVED', // Temporarily remove for testing
     };
 
     // Search in title and description
