@@ -206,8 +206,14 @@ export default function Home() {
   const navigate = useNavigate();
   const [selectedCar, setSelectedCar] = useState<any | null>(null);
 
-  const handleSearch = (f: any) => {
-    console.log("Searching with filters:", f);
+  const handleSearch = (filters: any) => {
+    const params = new URLSearchParams();
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value && value !== '') {
+        params.set(key, value as string);
+      }
+    });
+    navigate(`/search?${params.toString()}`);
   };
 
   const handleSelectCar = (car: any) => {

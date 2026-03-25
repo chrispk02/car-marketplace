@@ -7,6 +7,9 @@ import SignIn from './pages/SignIn';
 import Signup from './pages/Signup';
 import ListingDetail from './pages/ListingDetail';
 import AdminDashboard from './pages/AdminDashboard';
+import SellerDashboard from './pages/SellerDashboard';
+import CreateListing from './pages/CreateListing';
+import SearchResults from './pages/SearchResults';
 
 // Navbar with proper routing and auth
 const Navbar = () => {
@@ -99,9 +102,28 @@ export default function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/search" element={<SearchResults />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/listings/:id" element={<ListingDetail />} />
+
+        {/* Seller Routes */}
+        <Route
+          path="/my-listings"
+          element={
+            <ProtectedRoute requiredRole="SELLER">
+              <SellerDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/listings/create"
+          element={
+            <ProtectedRoute requiredRole="SELLER">
+              <CreateListing />
+            </ProtectedRoute>
+          }
+        />
 
         {/* Admin Routes */}
         <Route

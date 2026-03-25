@@ -166,19 +166,58 @@ export default function ListingDetail() {
                 </div>
                 <div>
                   <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Quãng đường</p>
-                  <p className="text-xl font-black text-gray-900">{car.mileage.toLocaleString()} km</p>
+                  <p className="text-xl font-black text-gray-900">{car.mileage?.toLocaleString()} miles</p>
                 </div>
                 <div>
                   <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Loại xe</p>
                   <p className="text-xl font-black text-gray-900">{car.bodyType}</p>
                 </div>
                 <div>
-                  <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Tình trạng</p>
-                  <p className="text-xl font-black text-gray-900">
-                    {car.status === 'APPROVED' ? '✓ Đã phê duyệt' : 'Chờ phê duyệt'}
-                  </p>
+                  <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Màu sắc</p>
+                  <p className="text-xl font-black text-gray-900">{car.color}</p>
                 </div>
+                <div>
+                  <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Nhiên liệu</p>
+                  <p className="text-xl font-black text-gray-900">{car.fuelType}</p>
+                </div>
+                <div>
+                  <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Hộp số</p>
+                  <p className="text-xl font-black text-gray-900">{car.transmission}</p>
+                </div>
+                <div>
+                  <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Tình trạng</p>
+                  <p className="text-xl font-black text-gray-900">{car.condition}</p>
+                </div>
+                <div>
+                  <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Dung tích</p>
+                  <p className="text-xl font-black text-gray-900">{car.engineSize}</p>
+                </div>
+                {car.horsepower && (
+                  <div>
+                    <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Công suất</p>
+                    <p className="text-xl font-black text-gray-900">{car.horsepower} HP</p>
+                  </div>
+                )}
+                {car.driveType && (
+                  <div>
+                    <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Hệ dẫn động</p>
+                    <p className="text-xl font-black text-gray-900">{car.driveType}</p>
+                  </div>
+                )}
               </div>
+
+              {car.features && car.features.length > 0 && (
+                <div className="mt-8 pt-8 border-t border-gray-100">
+                  <h3 className="text-lg font-black mb-4">Tính năng</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {car.features.map((feature, idx) => (
+                      <span key={idx} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
+                        {feature}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {car.description && (
                 <div className="mt-8 pt-8 border-t border-gray-100">

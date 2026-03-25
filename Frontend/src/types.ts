@@ -19,6 +19,16 @@ export interface Car {
   color?: string;
   fuelType?: string;
   transmission?: string;
+  condition?: string;
+  engineSize?: string;
+  horsepower?: number;
+  driveType?: string;
+  interior?: string;
+  features?: string[];
+  exteriorColor?: string;
+  interiorColor?: string;
+  owner?: string;
+  isActive?: boolean;
   createdAt?: string;
 }
 
